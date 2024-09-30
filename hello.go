@@ -3,5 +3,11 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Hello World!")
+	bytesWritten, err := fmt.Println("Hello World!")
+
+	if err != nil {
+		fmt.Println("Error", err)
+	} else {
+		fmt.Println("Bytes written", bytesWritten)
+	}
 }
