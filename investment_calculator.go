@@ -19,7 +19,11 @@ func main() {
 	ensurePositive(expenses, "Expenses")
 	ensurePositive(taxRate, "Tax rate")
 
-	ebt, profit, ratio := finance.GetEarningsMetrics(revenue, expenses, taxRate)
+	ebt, profit, ratio, warning := finance.GetEarningsMetrics(revenue, expenses, taxRate)
+
+	if warning {
+		fmt.Println("Warning: Profit is zero, division by zero avoided in ratio calculation.")
+	}
 
 	fmt.Println("EBT: ", ebt)
 	fmt.Println("Profit: ", profit)
