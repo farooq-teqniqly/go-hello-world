@@ -25,9 +25,13 @@ func main() {
 		fmt.Println("Warning: Profit is zero, division by zero avoided in ratio calculation.")
 	}
 
-	fmt.Println("EBT: ", ebt)
-	fmt.Println("Profit: ", profit)
-	fmt.Println("Ratio: ", ratio)
+	fmt.Println("EBT: ", formatCurrency(ebt))
+	fmt.Println("Profit: ", formatCurrency(profit))
+	fmt.Println("Ratio: ", formatCurrency(ratio))
+}
+
+func formatCurrency(value float64) string {
+	return fmt.Sprintf("$%.2f", value)
 }
 
 func getInput(prompt string, value *float64) {
