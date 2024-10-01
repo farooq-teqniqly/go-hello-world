@@ -16,6 +16,10 @@ func main() {
 	getInput("Enter the number of years: ", &years)
 	getInput("Enter expected rate of return: ", &expectedReturnRate)
 
+	ensurePositive(investmentAmount, "Investment amount")
+	ensurePositive(years, "Years")
+	ensurePositive(expectedReturnRate, "Expected rate of return")
+
 	fv := futureValue(investmentAmount, years, expectedReturnRate)
 	inflationAdjustedFV := futureValue(investmentAmount, years, inflationRate)
 
@@ -30,6 +34,12 @@ func getInput(prompt string, value *float64) {
 	if err != nil {
 		log.Fatal("Error: ", err)
 		return
+	}
+}
+
+func ensurePositive(value float64, param string) {
+	if value < 0 {
+		log.Fatal("Error:", param, " value must be positive")
 	}
 }
 
