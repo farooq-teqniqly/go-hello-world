@@ -3,28 +3,27 @@ package main
 import (
 	"fmt"
 	"log"
-	"math"
+	"teqniqly.com/go-investment-calculator/finance"
 )
 
 func main() {
-	const inflationRate = 2.5
-	var investmentAmount float64
-	var years float64
-	var expectedReturnRate float64
+	var revenue float64
+	var expenses float64
+	var taxRate float64
 
-	getInput("Enter investment amount: ", &investmentAmount)
-	getInput("Enter the number of years: ", &years)
-	getInput("Enter expected rate of return: ", &expectedReturnRate)
+	getInput("Enter revenue: ", &revenue)
+	getInput("Enter expenses: ", &expenses)
+	getInput("Enter tax rate: ", &taxRate)
 
-	ensurePositive(investmentAmount, "Investment amount")
-	ensurePositive(years, "Years")
-	ensurePositive(expectedReturnRate, "Expected rate of return")
+	ensurePositive(revenue, "Revenue")
+	ensurePositive(expenses, "Expenses")
+	ensurePositive(taxRate, "Tax rate")
 
-	fv := futureValue(investmentAmount, years, expectedReturnRate)
-	inflationAdjustedFV := futureValue(investmentAmount, years, inflationRate)
+	ebt, profit, ratio := finance.GetEarningsMetrics(revenue, expenses, taxRate)
 
-	fmt.Println("Future value: ", fv)
-	fmt.Println("Inflation adjusted future value (", inflationRate, " inflation rate)", inflationAdjustedFV)
+	fmt.Println("EBT: ", ebt)
+	fmt.Println("Profit: ", profit)
+	fmt.Println("Ratio: ", ratio)
 }
 
 func getInput(prompt string, value *float64) {
@@ -41,8 +40,4 @@ func ensurePositive(value float64, param string) {
 	if value < 0 {
 		log.Fatal("Error:", param, " value must be positive")
 	}
-}
-
-func futureValue(investmentAmount float64, years float64, rate float64) float64 {
-	return investmentAmount * math.Pow(1+(rate/100), years)
 }
