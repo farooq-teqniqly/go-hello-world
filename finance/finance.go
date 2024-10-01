@@ -13,6 +13,10 @@ func GetEarningsMetrics(revenue float64, expenses float64, taxRate float64) (flo
 		ratio = 0
 	} else {
 		ratio = ebt / profit
+
+		if profit < 0 {
+			ratio = -ratio
+		}
 	}
 
 	return ebt, profit, ratio, warning
