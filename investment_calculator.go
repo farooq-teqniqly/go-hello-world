@@ -27,7 +27,11 @@ func main() {
 
 	fmt.Println("EBT: ", formatCurrency(ebt))
 	fmt.Println("Profit: ", formatCurrency(profit))
-	fmt.Println("Ratio: ", formatCurrency(ratio))
+	fmt.Println("Ratio: ", formatFloat(ratio))
+}
+
+func formatFloat(value float64) string {
+	return fmt.Sprintf("%.2f", value)
 }
 
 func formatCurrency(value float64) string {
