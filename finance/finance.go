@@ -1,6 +1,6 @@
 package finance
 
-func GetEarningsMetrics(revenue float64, expenses float64, taxRate float64) (float64, float64, float64, bool) {
+func GetEarningsMetrics(revenue, expenses, taxRate float64) (float64, float64, float64, bool) {
 	ebt := revenue - expenses
 	tax := ebt * (taxRate / 100.0)
 	profit := ebt - tax
